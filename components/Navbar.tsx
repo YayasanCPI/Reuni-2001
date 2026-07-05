@@ -19,6 +19,7 @@ const Navbar = () => {
     { name: 'Tentang', href: '#about' },
     { name: 'Acara', href: '#event' },
     { name: 'Jadwal', href: '#schedule' },
+    { name: 'Sponsor', href: '#sponsorship' },
     { name: 'Galeri', href: '#gallery' },
   ];
 

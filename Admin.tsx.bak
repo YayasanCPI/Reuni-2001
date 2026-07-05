@@ -461,12 +461,13 @@ const Admin = () => {
                   </div>
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold font-serif mb-1">Keuntungan (Pisahkan dengan Koma)</label>
-                    <input type="text" value={item.benefits.join(", ")} onChange={e => {
+                    <textarea value={item.benefits.join(", ")} onChange={e => {
                       const newItems = [...(formData.sponsorshipPackages || [])];
                       newItems[idx].benefits = e.target.value.split(",").map(s => s.trim());
                       setFormData({...formData, sponsorshipPackages: newItems});
-                    }} className="w-full px-3 py-2 bg-white border border-navy-900" />
+                    }} rows={3} className="w-full px-3 py-2 bg-white border border-navy-900" > </textarea>
                   </div>
+                </div>
               </div>
             ))}
             <button onClick={() => {

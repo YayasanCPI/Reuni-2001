@@ -5,6 +5,9 @@ import Forewords from './components/Forewords';
 import About from './components/About';
 import EventDetails from './components/EventDetails';
 import Schedule from './components/Schedule';
+import Timeline from './components/Timeline';
+import Budget from './components/Budget';
+import Sponsorship from './components/Sponsorship';
 import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
 import Footer from './components/Footer';
@@ -23,6 +26,9 @@ const LandingPage = () => {
         <About />
         <EventDetails />
         <Schedule />
+        <Timeline />
+        <Budget />
+        <Sponsorship />
         <Gallery />
         <RSVP />
       </main>
