@@ -42,7 +42,7 @@ const Gallery = () => {
               <div className="tape -top-3 left-1/2 -translate-x-1/2 w-16 opacity-80"></div>
               <div className="relative aspect-square overflow-hidden bg-navy-100 border border-paper-300">
                 <img 
-                  src={img.src} 
+                  src={img.src || undefined} 
                   alt={img.caption} 
                   className="w-full h-full object-cover grayscale-[50%] sepia-[.3] contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:sepia-0"
                   loading="lazy"

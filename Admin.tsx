@@ -131,8 +131,16 @@ const Admin = () => {
               <input type="text" value={formData.eventDate} onChange={e => setFormData({...formData, eventDate: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" />
             </div>
             <div>
+              <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Waktu Countdown (Format ISO: YYYY-MM-DDTHH:mm:ss+07:00)</label>
+              <input type="text" value={formData.eventDateISO || ''} onChange={e => setFormData({...formData, eventDateISO: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" />
+            </div>
+            <div>
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Lokasi Singkat</label>
               <input type="text" value={formData.eventLocation} onChange={e => setFormData({...formData, eventLocation: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Google Apps Script Web App URL (Untuk RSVP)</label>
+              <input type="text" value={formData.googleSheetWebAppUrl || ''} onChange={e => setFormData({...formData, googleSheetWebAppUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://script.google.com/macros/s/.../exec" />
             </div>
             <div>
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Biaya Kontribusi</label>
@@ -372,7 +380,7 @@ const Admin = () => {
                 }} className="absolute top-2 right-2 text-red-500 hover:text-red-700 bg-white/80 rounded p-1">
                   <Trash2 className="w-4 h-4" />
                 </button>
-                <img src={img.src} alt={img.caption} className="w-full h-32 object-cover border border-paper-400 mb-2" />
+                <img src={img.src || undefined} alt={img.caption} className="w-full h-32 object-cover border border-paper-400 mb-2" />
                 <div>
                   <label className="block text-xs font-bold font-serif mb-1">URL Foto (Unsplash/Imgur dll)</label>
                   <input type="text" value={img.src} onChange={e => {

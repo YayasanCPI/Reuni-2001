@@ -13,8 +13,9 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    // Target date: August 15, 2026, 08:00 AM WIB (UTC+7)
-    const targetDate = new Date('2026-08-15T08:00:00+07:00').getTime();
+    // Target date using ISO string from data or fallback to Oct 10, 2026
+    const dateString = data?.eventDateISO || '2026-10-10T08:00:00+07:00';
+    const targetDate = new Date(dateString).getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();

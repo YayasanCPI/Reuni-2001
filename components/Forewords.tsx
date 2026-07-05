@@ -51,7 +51,7 @@ const Forewords = () => {
               <div className="flex flex-col md:flex-row gap-6 items-center md:items-start mb-6">
                 <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-lg overflow-hidden border-4 border-white shadow-md transform -rotate-3 bg-paper-300">
                   <img 
-                    src={forewords.alumniHead.photoUrl} 
+                    src={forewords.alumniHead.photoUrl || undefined} 
                     alt={forewords.alumniHead.name} 
                     className="w-full h-full object-cover grayscale contrast-125 sepia-[.3]"
                   />
@@ -84,7 +84,7 @@ const Forewords = () => {
                 </div>
                 <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-lg overflow-hidden border-4 border-white shadow-md transform rotate-3 bg-paper-300 order-1 md:order-2">
                   <img 
-                    src={forewords.committeeHead.photoUrl} 
+                    src={forewords.committeeHead.photoUrl || undefined} 
                     alt={forewords.committeeHead.name} 
                     className="w-full h-full object-cover grayscale contrast-125 sepia-[.3]"
                   />

@@ -16,7 +16,7 @@ const BackgroundDecorations = () => {
       {decorations.map((dec, idx) => (
         <motion.img
           key={idx}
-          src={dec.src}
+          src={dec.src || undefined}
           alt=""
           className="absolute object-contain grayscale mix-blend-multiply"
           style={{

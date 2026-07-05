@@ -13,6 +13,7 @@ export interface LandingPageData {
   heroTitle: string;
   heroSubtitle: string;
   eventDate: string;
+  eventDateISO?: string;
   eventLocation: string;
   aboutText1: string;
   aboutText2: string;
@@ -22,6 +23,7 @@ export interface LandingPageData {
   schedule: { time: string; title: string; description: string; location: string }[];
   gallery: { src: string; caption: string; rot: string }[];
   backgroundMusicUrl?: string;
+  googleSheetWebAppUrl?: string;
   forewords?: {
     alumniHead: Foreword;
     committeeHead: Foreword;
@@ -31,7 +33,8 @@ export interface LandingPageData {
 const defaultData: LandingPageData = {
   heroTitle: "REUNI PERAK",
   heroSubtitle: "Nostalgia Putih Abu-Abu",
-  eventDate: "Sabtu, 15 Ags '26",
+  eventDate: "Sabtu, 10 Okt '26",
+  eventDateISO: "2026-10-10T08:00:00+07:00",
   eventLocation: "Padang, Sumbar",
   aboutText1: "Telah 25 tahun kita meninggalkan gerbang SMAN 1 Padang. Membawa mimpi masing-masing, menempuh jalan yang berbeda. Kini saatnya kita kembali sejenak, memutar waktu, dan mengenang kembali masa-masa putih abu-abu yang penuh cerita.",
   aboutText2: "Reuni Perak ini bukan sekadar ajang berkumpul, melainkan momen untuk merajut kembali tali persaudaraan, berbagi cerita perjalanan hidup, dan mensyukuri pencapaian kita bersama.",
