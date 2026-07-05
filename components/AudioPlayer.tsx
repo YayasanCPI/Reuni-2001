@@ -113,7 +113,7 @@ const AudioPlayer = ({ url: propUrl }: AudioPlayerProps) => {
         </div>
       )}
 
-      <div className={`fixed bottom-6 right-6 z-50 group ${!hasInteracted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 group ${!hasInteracted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {error && (
         <div className="absolute bottom-20 right-0 w-64 bg-red-50 text-red-600 text-xs p-3 rounded-lg border border-red-200 shadow-lg mb-2">
           <div className="flex gap-2 items-start">
@@ -123,54 +123,54 @@ const AudioPlayer = ({ url: propUrl }: AudioPlayerProps) => {
         </div>
       )}
       
-      <div className={`bg-paper-100 border-2 border-navy-900 rounded-full p-2 flex items-center gap-2 shadow-[4px_4px_0px_#1e293b] transition-transform ${error ? '' : 'hover:-translate-y-1'}`}>
+      <div className={`bg-paper-100/70 backdrop-blur-md border border-navy-900/50 rounded-full p-1.5 flex items-center gap-1.5 shadow-[2px_2px_0px_rgba(30,41,59,0.5)] transition-transform ${error ? '' : 'hover:-translate-y-1'}`}>
         
         {/* Play/Pause Button inside Cassette Animation */}
         <button 
           onClick={togglePlay}
-          className={`relative w-24 h-16 rounded-md bg-navy-800 border-2 border-navy-900 flex items-center justify-center p-1.5 shadow-inner overflow-hidden ${error ? 'opacity-50 cursor-not-allowed' : ''} transition-transform hover:-translate-y-0.5`}
+          className={`relative w-16 h-11 rounded bg-navy-800 border-2 border-navy-900 flex items-center justify-center p-2 shadow-inner overflow-hidden ${error ? 'opacity-50 cursor-not-allowed' : ''} transition-transform hover:-translate-y-0.5`}
           title={error ? "Error" : (isPlaying ? "Jeda Musik" : "Putar Musik")}
           disabled={!!error}
         >
           {/* Tape Sticker */}
-          <div className="w-full h-full bg-paper-200 rounded flex flex-col items-center justify-center px-1">
+          <div className="w-full h-full bg-white rounded-sm flex flex-col items-center justify-center px-1 py-0.5">
             <div className="flex w-full items-center justify-between relative">
               {/* Overlay Play/Pause Icon for better UX */}
               <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 bg-navy-900/40 rounded transition-opacity">
-                {isPlaying ? <Pause className="w-6 h-6 text-paper-100" fill="currentColor" /> : <Play className="w-6 h-6 text-paper-100" fill="currentColor" />}
+                {isPlaying ? <Pause className="w-4 h-4 text-paper-100" fill="currentColor" /> : <Play className="w-4 h-4 text-paper-100" fill="currentColor" />}
               </div>
 
               {/* Left reel */}
-              <div className={`w-5 h-5 bg-navy-900 rounded-full flex items-center justify-center relative ${isPlaying && !error ? 'animate-[spin_2s_linear_infinite]' : ''}`}>
-                <div className="w-1.5 h-1.5 bg-paper-200 rounded-full"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 top-[1px] left-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 bottom-[1px] left-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 left-[1px] top-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 right-[1px] top-[8px]"></div>
+              <div className={`w-2.5 h-2.5 bg-navy-900 rounded-full flex items-center justify-center relative ${isPlaying && !error ? 'animate-[spin_2s_linear_infinite]' : ''}`}>
+                <div className="w-[3px] h-[3px] bg-white rounded-full"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white top-[0.5px] left-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white bottom-[0.5px] left-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white left-[0.5px] top-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white right-[0.5px] top-[5px]"></div>
               </div>
               
               {/* Middle window */}
-              <div className="w-6 h-3 bg-navy-800 rounded-sm flex items-center justify-center overflow-hidden border border-navy-900">
-                <div className="w-full h-1 bg-navy-900/80"></div>
+              <div className="w-4 h-1.5 bg-navy-800 rounded-sm flex items-center justify-center overflow-hidden border border-navy-900">
+                <div className="w-full h-[2px] bg-navy-900/80"></div>
               </div>
 
               {/* Right reel */}
-              <div className={`w-5 h-5 bg-navy-900 rounded-full flex items-center justify-center relative ${isPlaying && !error ? 'animate-[spin_2s_linear_infinite]' : ''}`}>
-                <div className="w-1.5 h-1.5 bg-paper-200 rounded-full"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 top-[1px] left-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 bottom-[1px] left-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 left-[1px] top-[8px]"></div>
-                <div className="absolute w-1 h-1 bg-paper-200 right-[1px] top-[8px]"></div>
+              <div className={`w-2.5 h-2.5 bg-navy-900 rounded-full flex items-center justify-center relative ${isPlaying && !error ? 'animate-[spin_2s_linear_infinite]' : ''}`}>
+                <div className="w-[3px] h-[3px] bg-white rounded-full"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white top-[0.5px] left-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white bottom-[0.5px] left-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white left-[0.5px] top-[5px]"></div>
+                <div className="absolute w-[3px] h-[3px] bg-white right-[0.5px] top-[5px]"></div>
               </div>
             </div>
             {/* Cassette label lines */}
-            <div className="w-full mt-2 space-y-1 px-1">
+            <div className="w-full mt-0.5 space-y-[2px] px-0.5">
               <div className="h-[2px] w-full bg-navy-900/20"></div>
               <div className="h-[2px] w-3/4 bg-navy-900/20"></div>
             </div>
           </div>
           {/* Bottom trapezium shape effect */}
-          <div className="absolute -bottom-1 w-14 h-3 bg-navy-800 rounded-t border-t border-navy-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+          <div className="absolute -bottom-1 w-12 h-2 bg-navy-800 rounded-t border-t border-navy-900 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
             <div className="flex justify-between items-center w-full h-full px-2">
                <div className="w-1 h-1 bg-navy-900 rounded-full"></div>
                <div className="w-1 h-1 bg-navy-900 rounded-full"></div>
@@ -185,7 +185,7 @@ const AudioPlayer = ({ url: propUrl }: AudioPlayerProps) => {
           title={error ? "Error" : (isMuted ? "Bunyikan Musik" : "Bisukan Musik")}
           disabled={!!error}
         >
-          {isMuted || !isPlaying ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          {isMuted || !isPlaying ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </button>
 
         {!hasInteracted && !error && (
