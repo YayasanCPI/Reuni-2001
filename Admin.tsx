@@ -149,6 +149,10 @@ const Admin = () => {
             <div>
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">URL Musik Background (YouTube)</label>
               <input type="text" value={formData.backgroundMusicUrl || ''} onChange={e => setFormData({...formData, backgroundMusicUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://youtu.be/..." />
+              </div>
+              <div>
+                <label className="block text-xs font-bold font-serif mb-1">URL Video Intro Depan (kosongkan jika tidak ada)</label>
+                <input type="text" value={formData.introVideoUrl || ''} onChange={e => setFormData({...formData, introVideoUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://..." />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Teks Tentang 1</label>

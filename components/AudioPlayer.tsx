@@ -95,8 +95,19 @@ const AudioPlayer = ({ url: propUrl }: AudioPlayerProps) => {
   return (
     <>
       {!hasInteracted && !error && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-900/90 backdrop-blur-sm transition-opacity duration-500">
-          <div className="text-center p-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-900/90 backdrop-blur-sm transition-opacity duration-500 overflow-hidden">
+          {data?.introVideoUrl && (
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
+            >
+              <source src={data.introVideoUrl} type="video/mp4" />
+            </video>
+          )}
+          <div className="text-center p-8 relative z-10">
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-paper-200 mb-6 drop-shadow-md">
               Siap Bernostalgia?
             </h2>

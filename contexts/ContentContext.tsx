@@ -194,6 +194,7 @@ const defaultData: LandingPageData = {
     { src: "https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?q=80&w=2070&auto=format&fit=crop", caption: "Lulus!", rot: "rotate-3" }
   ],
   backgroundMusicUrl: "https://youtu.be/Ch3l_Q9PxpQ",
+  introVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   forewords: {
     alumniHead: {
       title: "Dari Ketua Umum Alumni 2001",
