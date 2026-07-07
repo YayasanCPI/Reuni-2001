@@ -102,9 +102,20 @@ const AudioPlayer = ({ url: propUrl }: AudioPlayerProps) => {
               muted 
               loop 
               playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
+              className={`absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none ${data?.introVideoUrlMobile ? 'hidden md:block' : ''}`}
             >
               <source src={data.introVideoUrl} type="video/mp4" />
+            </video>
+          )}
+          {data?.introVideoUrlMobile && (
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none md:hidden"
+            >
+              <source src={data.introVideoUrlMobile} type="video/mp4" />
             </video>
           )}
           <div className="text-center p-8 relative z-10">

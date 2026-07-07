@@ -154,6 +154,10 @@ const Admin = () => {
                 <label className="block text-xs font-bold font-serif mb-1">URL Video Intro Depan (kosongkan jika tidak ada)</label>
                 <input type="text" value={formData.introVideoUrl || ''} onChange={e => setFormData({...formData, introVideoUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://..." />
             </div>
+              <div>
+                <label className="block text-xs font-bold font-serif mb-1">URL Video Intro Depan Mobile (Rasio 9:16)</label>
+                <input type="text" value={formData.introVideoUrlMobile || ''} onChange={e => setFormData({...formData, introVideoUrlMobile: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://..." />
+              </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Teks Tentang 1</label>
               <textarea value={formData.aboutText1} onChange={e => setFormData({...formData, aboutText1: e.target.value})} rows={3} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" />

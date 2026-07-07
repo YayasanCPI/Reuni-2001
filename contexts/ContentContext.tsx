@@ -195,6 +195,7 @@ const defaultData: LandingPageData = {
   ],
   backgroundMusicUrl: "https://youtu.be/Ch3l_Q9PxpQ",
   introVideoUrl: "https://www.image2url.com/r2/default/videos/1783431340717-7a9d71cd-bd4e-4e3c-bd1e-28603f7af861.mp4",
+  introVideoUrlMobile: "",
   forewords: {
     alumniHead: {
       title: "Dari Ketua Umum Alumni 2001",
