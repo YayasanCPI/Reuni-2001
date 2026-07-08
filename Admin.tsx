@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from './contexts/AuthContext';
 import { useContent } from './contexts/ContentContext';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './lib/firebase';
+import { auth, db } from './lib/firebase';
+import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { LogOut, Save, Plus, Trash2 } from 'lucide-react';
 import { LandingPageData } from './contexts/ContentContext';
 
@@ -16,6 +17,17 @@ const Admin = () => {
   
   const [formData, setFormData] = useState<LandingPageData | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [attendees, setAttendees] = useState<any[]>([]);
+
+  React.useEffect(() => {
+    if (!user) return;
+    const q = query(collection(db, 'attendees'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const attendeesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setAttendees(attendeesData);
+    });
+    return () => unsubscribe();
+  }, [user]);
 
   // Initialize form data when data loads
   React.useEffect(() => {
@@ -113,6 +125,42 @@ const Admin = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 mt-8 space-y-12">
+        {/* Attendees List */}
+        <section className="bg-paper-200 p-6 shadow-md border-2 border-navy-900 relative">
+          <h2 className="text-2xl font-marker mb-6">Daftar Peserta Konfirmasi</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse border border-navy-900 bg-white">
+              <thead>
+                <tr className="bg-paper-400">
+                  <th className="border border-navy-900 p-2 font-serif">Nama</th>
+                  <th className="border border-navy-900 p-2 font-serif">Panggilan</th>
+                  <th className="border border-navy-900 p-2 font-serif">Angkatan/Kelas</th>
+                  <th className="border border-navy-900 p-2 font-serif">Domisili</th>
+                  <th className="border border-navy-900 p-2 font-serif">Pekerjaan</th>
+                  <th className="border border-navy-900 p-2 font-serif">Kehadiran</th>
+                </tr>
+              </thead>
+              <tbody>
+                {attendees.map(a => (
+                  <tr key={a.id} className="hover:bg-paper-100">
+                    <td className="border border-navy-900 p-2">{a.name}</td>
+                    <td className="border border-navy-900 p-2">{a.nickname}</td>
+                    <td className="border border-navy-900 p-2">{a.class}</td>
+                    <td className="border border-navy-900 p-2">{a.city}</td>
+                    <td className="border border-navy-900 p-2">{a.job}</td>
+                    <td className="border border-navy-900 p-2">{a.attendance}</td>
+                  </tr>
+                ))}
+                {attendees.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="border border-navy-900 p-4 text-center text-navy-600 font-serif">Belum ada peserta yang mengkonfirmasi kehadiran.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         {/* General Settings */}
         <section className="bg-paper-200 p-6 shadow-md border-2 border-navy-900 relative">
           <div className="tape -top-3 -left-3 w-16 rotate-45"></div>
@@ -139,6 +187,8 @@ const Admin = () => {
               <input type="text" value={formData.eventLocation} onChange={e => setFormData({...formData, eventLocation: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" />
             </div>
             <div>
+              <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Base Attendee Count (Jumlah Peserta Awal Tambahan di Counter)</label>
+              <input type="number" value={formData.baseAttendeeCount || 0} onChange={e => setFormData({...formData, baseAttendeeCount: parseInt(e.target.value) || 0})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900 mb-4" />
               <label className="block text-sm font-bold text-navy-800 font-serif mb-1">Google Apps Script Web App URL (Untuk RSVP)</label>
               <input type="text" value={formData.googleSheetWebAppUrl || ''} onChange={e => setFormData({...formData, googleSheetWebAppUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://script.google.com/macros/s/.../exec" />
             </div>
@@ -442,6 +492,11 @@ const Admin = () => {
         {/* Sponsorship */}
         <section className="bg-paper-200 p-6 shadow-md border-2 border-navy-900 relative">
           <h2 className="text-2xl font-marker mb-6">Sponsorship</h2>
+          <div className="mb-6">
+            <label className="block text-sm font-bold text-navy-800 font-serif mb-1">URL Proposal Sponsorship (PDF/Link)</label>
+            <input type="text" value={formData.sponsorshipProposalUrl || ''} onChange={e => setFormData({...formData, sponsorshipProposalUrl: e.target.value})} className="w-full px-3 py-2 bg-paper-100 border border-navy-900" placeholder="https://..." />
+            <p className="text-xs text-navy-600 mt-1">Kosongkan jika tidak ada file proposal.</p>
+          </div>
           <div className="space-y-4">
             {formData.sponsorshipPackages?.map((item, idx) => (
               <div key={idx} className="bg-paper-100 p-4 border border-navy-900 relative pr-10">

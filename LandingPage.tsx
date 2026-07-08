@@ -10,9 +10,12 @@ import Budget from './components/Budget';
 import Sponsorship from './components/Sponsorship';
 import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
+import AttendeeCounter from './components/AttendeeCounter';
+import NostalgiaMessages from './components/NostalgiaMessages';
 import Footer from './components/Footer';
 import AudioPlayer from './components/AudioPlayer';
 import BackgroundDecorations from './components/BackgroundDecorations';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 const LandingPage = () => {
   return (
@@ -29,10 +32,13 @@ const LandingPage = () => {
         <Timeline />
         <Budget />
         <Sponsorship />
+        <NostalgiaMessages />
         <Gallery />
+        <AttendeeCounter />
         <RSVP />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };

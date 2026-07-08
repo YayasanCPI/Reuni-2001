@@ -20,6 +20,7 @@ const Navbar = () => {
     { name: 'Acara', href: '#event' },
     { name: 'Jadwal', href: '#schedule' },
     { name: 'Sponsor', href: '#sponsorship' },
+    { name: 'Mading', href: '#nostalgia' },
     { name: 'Galeri', href: '#gallery' },
   ];
 

@@ -62,6 +62,8 @@ export interface LandingPageData {
   budgetItems?: BudgetItem[];
   timelineItems?: TimelineItem[];
   sponsorshipPackages?: SponsorshipPackage[];
+  sponsorshipProposalUrl?: string;
+  baseAttendeeCount?: number;
   gallery: { src: string; caption: string; rot: string }[];
   backgroundMusicUrl?: string;
   googleSheetWebAppUrl?: string;
@@ -149,6 +151,8 @@ const defaultData: LandingPageData = {
     { phase: "Fase 4: Publikasi", time: "Sep 2026 - Okt 2026", target: "Publikasi Medsos, Pengiriman ID Cards" },
     { phase: "Fase 5: Eksekusi", time: "10 - 11 Okt 2026", target: "Pelaksanaan Acara 'Nostalgia Putih Abu-Abu'" }
   ],
+  sponsorshipProposalUrl: "",
+  baseAttendeeCount: 45,
   sponsorshipPackages: [
     {
       title: "Platinum",

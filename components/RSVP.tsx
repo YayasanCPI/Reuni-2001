@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Send, CheckCircle2, Download } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const RSVP = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -46,6 +48,17 @@ const RSVP = () => {
 
     setIsSubmitting(true);
     try {
+      // Save to Firebase first
+      try {
+        await addDoc(collection(db, 'attendees'), {
+          ...formData,
+          createdAt: serverTimestamp(),
+          status: 'confirmed'
+        });
+      } catch (fbErr) {
+        console.error("Firebase save error", fbErr);
+      }
+
       // We use no-cors because Apps Script might not return proper CORS headers for JSON
       await fetch(data.googleSheetWebAppUrl, {
         method: 'POST',
