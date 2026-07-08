@@ -67,6 +67,8 @@ export interface LandingPageData {
   gallery: { src: string; caption: string; rot: string }[];
   backgroundMusicUrl?: string;
   googleSheetWebAppUrl?: string;
+  introVideoUrl?: string;
+  introVideoUrlMobile?: string;
   forewords?: {
     alumniHead: Foreword;
     committeeHead: Foreword;
@@ -153,6 +155,7 @@ const defaultData: LandingPageData = {
   ],
   sponsorshipProposalUrl: "",
   baseAttendeeCount: 45,
+  googleSheetWebAppUrl: "",
   sponsorshipPackages: [
     {
       title: "Platinum",
@@ -243,7 +246,9 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   const updateData = async (newData: LandingPageData) => {
-    await setDoc(doc(db, 'settings', 'landingPage'), newData);
+    // Menghapus nilai undefined secara otomatis dengan stringify+parse agar setDoc tidak gagal
+    const cleanData = JSON.parse(JSON.stringify(newData));
+    await setDoc(doc(db, 'settings', 'landingPage'), cleanData);
   };
 
   return (
