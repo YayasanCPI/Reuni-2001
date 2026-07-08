@@ -25,6 +25,8 @@ const Admin = () => {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const attendeesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setAttendees(attendeesData);
+    }, (error) => {
+      console.error("Admin onSnapshot error:", error.code, error.message);
     });
     return () => unsubscribe();
   }, [user]);

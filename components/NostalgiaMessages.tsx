@@ -27,6 +27,8 @@ const NostalgiaMessages = () => {
         ...doc.data()
       }));
       setMessages(msgs);
+    }, (error) => {
+      console.error("onSnapshot error:", error.code, error.message);
     });
     return () => unsubscribe();
   }, []);
