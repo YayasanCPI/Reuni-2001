@@ -19,10 +19,10 @@ const Admin = () => {
 
   // Initialize form data when data loads
   React.useEffect(() => {
-    if (data && !formData) {
+    if (data && !dataLoading && !formData) {
       setFormData(data);
     }
-  }, [data, formData]);
+  }, [data, dataLoading, formData]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
