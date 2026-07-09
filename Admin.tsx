@@ -134,28 +134,42 @@ const Admin = () => {
             <table className="w-full text-left border-collapse border border-navy-900 bg-white">
               <thead>
                 <tr className="bg-paper-400">
-                  <th className="border border-navy-900 p-2 font-serif">Nama</th>
-                  <th className="border border-navy-900 p-2 font-serif">Panggilan</th>
-                  <th className="border border-navy-900 p-2 font-serif">Angkatan/Kelas</th>
-                  <th className="border border-navy-900 p-2 font-serif">Domisili</th>
-                  <th className="border border-navy-900 p-2 font-serif">Pekerjaan</th>
-                  <th className="border border-navy-900 p-2 font-serif">Kehadiran</th>
+                  <th className="border border-navy-900 p-2 font-serif text-sm">Nama Lengkap & Panggilan</th>
+                  <th className="border border-navy-900 p-2 font-serif text-sm">Kelas & Domisili</th>
+                  <th className="border border-navy-900 p-2 font-serif text-sm">Pekerjaan / Aktivitas</th>
+                  <th className="border border-navy-900 p-2 font-serif text-sm">Kehadiran</th>
                 </tr>
               </thead>
               <tbody>
                 {attendees.map(a => (
                   <tr key={a.id} className="hover:bg-paper-100">
-                    <td className="border border-navy-900 p-2">{a.name}</td>
-                    <td className="border border-navy-900 p-2">{a.nickname}</td>
-                    <td className="border border-navy-900 p-2">{a.class}</td>
-                    <td className="border border-navy-900 p-2">{a.city}</td>
-                    <td className="border border-navy-900 p-2">{a.job}</td>
-                    <td className="border border-navy-900 p-2">{a.attendance}</td>
+                    <td className="border border-navy-900 p-2 text-sm">
+                      <div className="font-bold">{a.name}</div>
+                      <div className="text-navy-600 text-xs">Panggilan: {a.nickname}</div>
+                    </td>
+                    <td className="border border-navy-900 p-2 text-sm">
+                      <div>Kelas: {a.class}</div>
+                      <div className="text-navy-600 text-xs">{a.city}</div>
+                    </td>
+                    <td className="border border-navy-900 p-2 text-sm">
+                      <div className="font-bold">{a.jobStatus || a.job}</div>
+                      {a.jobTitle && <div className="text-xs">{a.jobTitle}</div>}
+                      {a.companyName && <div className="text-navy-600 text-xs">{a.companyName}</div>}
+                    </td>
+                    <td className="border border-navy-900 p-2 text-sm">
+                      <span className={`px-2 py-1 text-xs font-bold ${
+                        a.attendance === 'yes' ? 'bg-green-100 text-green-800' :
+                        a.attendance === 'maybe' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {a.attendance === 'yes' ? 'Hadir' : a.attendance === 'maybe' ? 'Mungkin' : 'Skip'}
+                      </span>
+                    </td>
                   </tr>
                 ))}
                 {attendees.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="border border-navy-900 p-4 text-center text-navy-600 font-serif">Belum ada peserta yang mengkonfirmasi kehadiran.</td>
+                    <td colSpan={4} className="border border-navy-900 p-4 text-center text-navy-600 font-serif">Belum ada peserta yang mengkonfirmasi kehadiran.</td>
                   </tr>
                 )}
               </tbody>

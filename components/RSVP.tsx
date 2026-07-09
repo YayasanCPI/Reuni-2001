@@ -12,10 +12,10 @@ const RSVP = () => {
   const [formData, setFormData] = useState({
     name: '',
     nickname: '',
-    email: '',
-    phone: '',
     city: '',
-    job: '',
+    jobStatus: '',
+    jobTitle: '',
+    companyName: '',
     class: '',
     attendance: '',
     photo: ''
@@ -242,33 +242,6 @@ const RSVP = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1">
-                    <label htmlFor="email" className="text-xs font-bold text-navy-800 font-serif">Email</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      required
-                      value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
-                      placeholder="email@example.com"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label htmlFor="phone" className="text-xs font-bold text-navy-800 font-serif">No. WhatsApp & Telp</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      required
-                      value={formData.phone}
-                      onChange={e => setFormData({...formData, phone: e.target.value})}
-                      className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
-                      placeholder="08..."
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1">
                     <label htmlFor="city" className="text-xs font-bold text-navy-800 font-serif">Kota Domisili</label>
                     <input 
                       type="text" 
@@ -281,18 +254,154 @@ const RSVP = () => {
                     />
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="job" className="text-xs font-bold text-navy-800 font-serif">Pekerjaan Sebagai</label>
-                    <input 
-                      type="text" 
-                      id="job" 
+                    <label htmlFor="jobStatus" className="text-xs font-bold text-navy-800 font-serif">Status Pekerjaan</label>
+                    <select 
+                      id="jobStatus" 
                       required
-                      value={formData.job}
-                      onChange={e => setFormData({...formData, job: e.target.value})}
+                      value={formData.jobStatus}
+                      onChange={e => setFormData({...formData, jobStatus: e.target.value, jobTitle: '', companyName: ''})}
                       className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
-                      placeholder="Contoh: Wirausaha"
-                    />
+                    >
+                      <option value="">Pilih Status</option>
+                      <option value="Pegawai Swasta">Pegawai Swasta</option>
+                      <option value="Pegawai Negeri Sipil (PNS) / BUMN">Pegawai Negeri Sipil (PNS) / BUMN</option>
+                      <option value="Wiraswasta / Punya Usaha">Wiraswasta / Punya Usaha</option>
+                      <option value="Relawan / Pekerja Sosial">Relawan / Pekerja Sosial</option>
+                      <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                      <option value="Tidak Bekerja / Lainnya">Tidak Bekerja / Lainnya</option>
+                    </select>
                   </div>
                 </div>
+
+                {formData.jobStatus === 'Pegawai Swasta' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1">
+                      <label htmlFor="jobTitle" className="text-xs font-bold text-navy-800 font-serif">Pekerjaan Sebagai Apa</label>
+                      <input 
+                        type="text" 
+                        id="jobTitle" 
+                        required
+                        value={formData.jobTitle}
+                        onChange={e => setFormData({...formData, jobTitle: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Manajer Operasional"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="companyName" className="text-xs font-bold text-navy-800 font-serif">Di Perusahaan Apa</label>
+                      <input 
+                        type="text" 
+                        id="companyName" 
+                        required
+                        value={formData.companyName}
+                        onChange={e => setFormData({...formData, companyName: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: PT. Maju Bersama"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {formData.jobStatus === 'Pegawai Negeri Sipil (PNS) / BUMN' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1">
+                      <label htmlFor="jobTitle" className="text-xs font-bold text-navy-800 font-serif">Pekerjaan Sebagai Apa</label>
+                      <input 
+                        type="text" 
+                        id="jobTitle" 
+                        required
+                        value={formData.jobTitle}
+                        onChange={e => setFormData({...formData, jobTitle: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Staf IT / Dokter"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="companyName" className="text-xs font-bold text-navy-800 font-serif">Di Instansi / Dinas Apa</label>
+                      <input 
+                        type="text" 
+                        id="companyName" 
+                        required
+                        value={formData.companyName}
+                        onChange={e => setFormData({...formData, companyName: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Pemkot Padang / PLN"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {formData.jobStatus === 'Wiraswasta / Punya Usaha' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1">
+                      <label htmlFor="jobTitle" className="text-xs font-bold text-navy-800 font-serif">Bidang Usaha</label>
+                      <input 
+                        type="text" 
+                        id="jobTitle" 
+                        required
+                        value={formData.jobTitle}
+                        onChange={e => setFormData({...formData, jobTitle: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Kuliner / Konstruksi"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="companyName" className="text-xs font-bold text-navy-800 font-serif">Nama Usaha</label>
+                      <input 
+                        type="text" 
+                        id="companyName" 
+                        required
+                        value={formData.companyName}
+                        onChange={e => setFormData({...formData, companyName: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Toko Barokah / CV. Sukses"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {formData.jobStatus === 'Relawan / Pekerja Sosial' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-1">
+                      <label htmlFor="jobTitle" className="text-xs font-bold text-navy-800 font-serif">Bidang Fokus</label>
+                      <input 
+                        type="text" 
+                        id="jobTitle" 
+                        required
+                        value={formData.jobTitle}
+                        onChange={e => setFormData({...formData, jobTitle: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Pendidikan / Kemanusiaan"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="companyName" className="text-xs font-bold text-navy-800 font-serif">Nama Organisasi / Yayasan</label>
+                      <input 
+                        type="text" 
+                        id="companyName" 
+                        required
+                        value={formData.companyName}
+                        onChange={e => setFormData({...formData, companyName: e.target.value})}
+                        className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                        placeholder="Contoh: Dompet Dhuafa / PMI"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {(formData.jobStatus === 'Ibu Rumah Tangga' || formData.jobStatus === 'Tidak Bekerja / Lainnya') && (
+                  <div className="space-y-1">
+                    <label htmlFor="jobTitle" className="text-xs font-bold text-navy-800 font-serif">Keterangan / Aktivitas Saat Ini (Opsional)</label>
+                    <input 
+                      type="text" 
+                      id="jobTitle" 
+                      value={formData.jobTitle}
+                      onChange={e => setFormData({...formData, jobTitle: e.target.value})}
+                      className="w-full px-3 py-2 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm"
+                      placeholder="Contoh: Mengurus anak, dll"
+                    />
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1">
