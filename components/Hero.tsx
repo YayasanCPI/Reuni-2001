@@ -145,7 +145,7 @@ const Hero = () => {
             className="absolute top-10 right-10 z-20 polaroid w-64 transform rotate-6"
           >
             <div className="tape -top-3 left-1/2 -translate-x-1/2"></div>
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Kenangan SMA" referrerPolicy="no-referrer" className="w-full h-48 object-cover sepia-[.3] contrast-125" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Upacara_Bendera_SMA_Negeri_82_Jakarta.jpg" alt="Kenangan SMA" referrerPolicy="no-referrer" className="w-full h-48 object-cover sepia-[.3] contrast-125" />
             <p className="font-marker text-navy-900 text-center mt-4 text-xl">1998 - 2001</p>
           </motion.div>
 
@@ -156,7 +156,7 @@ const Hero = () => {
             className="absolute top-40 left-0 z-10 polaroid w-56 transform -rotate-12"
           >
             <div className="tape -top-3 left-4"></div>
-            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop" alt="Teman SMA" referrerPolicy="no-referrer" className="w-full h-40 object-cover grayscale-[0.8] contrast-125" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Para_Pendidik_SMA_Negeri_82.jpg" alt="Teman SMA" referrerPolicy="no-referrer" className="w-full h-40 object-cover grayscale-[0.8] contrast-125" />
             <p className="font-marker text-navy-900 text-center mt-3 text-lg">Cemara Class!</p>
           </motion.div>
 

@@ -71,7 +71,7 @@ const About = () => {
               <div className="tape -top-4 left-1/2 -translate-x-1/2 w-24"></div>
               <div className="relative aspect-[4/5] bg-navy-100 mb-4 overflow-hidden border border-paper-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop" 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Soto_ayam.JPG/1280px-Soto_ayam.JPG" 
                   alt="Kantin Sekolah" 
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover sepia-[.4] contrast-110 grayscale-[30%]"
@@ -83,7 +83,7 @@ const About = () => {
             <div className="absolute -bottom-10 -left-10 polaroid -rotate-6 w-48 hidden md:block">
               <div className="tape -top-3 left-4 w-16"></div>
               <img 
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2000&auto=format&fit=crop" 
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/b4/SMA_Labschool_Basketball_Club.jpg" 
                   alt="Jam Kosong" 
                   referrerPolicy="no-referrer"
                   className="w-full h-32 object-cover sepia-[.2] contrast-125"
