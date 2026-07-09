@@ -71,8 +71,9 @@ const About = () => {
               <div className="tape -top-4 left-1/2 -translate-x-1/2 w-24"></div>
               <div className="relative aspect-[4/5] bg-navy-100 mb-4 overflow-hidden border border-paper-300">
                 <img 
-                  src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069&auto=format&fit=crop" 
-                  alt="School Memories" 
+                  src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop" 
+                  alt="Kantin Sekolah" 
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover sepia-[.4] contrast-110 grayscale-[30%]"
                 />
               </div>
@@ -82,8 +83,9 @@ const About = () => {
             <div className="absolute -bottom-10 -left-10 polaroid -rotate-6 w-48 hidden md:block">
               <div className="tape -top-3 left-4 w-16"></div>
               <img 
-                  src="https://images.unsplash.com/photo-1540331547168-8b6310ce2129?q=80&w=2069&auto=format&fit=crop" 
-                  alt="Friends" 
+                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2000&auto=format&fit=crop" 
+                  alt="Jam Kosong" 
+                  referrerPolicy="no-referrer"
                   className="w-full h-32 object-cover sepia-[.2] contrast-125"
                 />
               <p className="font-marker text-navy-900 text-center text-sm mt-3">Jam Kosong!</p>
