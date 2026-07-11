@@ -388,6 +388,75 @@ const Admin = () => {
           </div>
         </section>
 
+        {/* Progress Kontribusi Kelas */}
+        <section className="bg-paper-200 p-6 shadow-md border-2 border-navy-900 relative">
+          <div className="tape -top-3 left-10 w-16"></div>
+          <h2 className="text-2xl font-marker mb-6">Progress Kontribusi Kelas</h2>
+          
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {formData.classFundingProgress && formData.classFundingProgress.map((cls, idx) => (
+                <div key={idx} className="bg-paper-100 p-4 border border-navy-900">
+                  <div className="flex justify-between items-center mb-4">
+                    <input 
+                      type="text" 
+                      value={cls.className} 
+                      onChange={e => {
+                        const newProgress = [...(formData.classFundingProgress || [])];
+                        newProgress[idx].className = e.target.value;
+                        setFormData({...formData, classFundingProgress: newProgress});
+                      }} 
+                      className="px-3 py-1 bg-white border border-navy-900 font-bold font-serif text-sm w-1/2" 
+                      placeholder="Nama Kelas"
+                    />
+                    <button onClick={() => {
+                      const newProgress = formData.classFundingProgress?.filter((_, i) => i !== idx);
+                      setFormData({...formData, classFundingProgress: newProgress});
+                    }} className="text-red-500 hover:text-red-700">
+                      <Trash2 className="w-5 h-5" />
+                    </button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-bold font-serif mb-1">Terkumpul (Rp)</label>
+                      <input 
+                        type="number" 
+                        value={cls.collected} 
+                        onChange={e => {
+                          const newProgress = [...(formData.classFundingProgress || [])];
+                          newProgress[idx].collected = parseInt(e.target.value) || 0;
+                          setFormData({...formData, classFundingProgress: newProgress});
+                        }} 
+                        className="w-full px-3 py-2 bg-white border border-navy-900" 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold font-serif mb-1">Target (Rp)</label>
+                      <input 
+                        type="number" 
+                        value={cls.target} 
+                        onChange={e => {
+                          const newProgress = [...(formData.classFundingProgress || [])];
+                          newProgress[idx].target = parseInt(e.target.value) || 0;
+                          setFormData({...formData, classFundingProgress: newProgress});
+                        }} 
+                        className="w-full px-3 py-2 bg-white border border-navy-900" 
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => {
+              const newProgress = [...(formData.classFundingProgress || []), { className: 'Kelas Baru', collected: 0, target: 12500000 }];
+              setFormData({...formData, classFundingProgress: newProgress});
+            }} className="flex items-center gap-2 text-navy-700 font-bold font-serif hover:text-navy-900">
+              <Plus className="w-4 h-4" /> Tambah Kelas
+            </button>
+          </div>
+        </section>
+
         {/* Detailed Schedule (Advanced) */}
         <section className="bg-paper-200 p-6 shadow-md border-2 border-navy-900 relative">
           <h2 className="text-2xl font-marker mb-6">Detail Jadwal Acara (Pagi, Sore, Minggu)</h2>

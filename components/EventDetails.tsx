@@ -69,12 +69,15 @@ const EventDetails = () => {
               <div className="w-14 h-14 bg-paper-200 flex items-center justify-center mb-8 border-2 border-paper-500 transform -rotate-3">
                 <Ticket className="w-6 h-6 text-navy-900" />
               </div>
-              <h3 className="text-3xl font-serif font-bold mb-2 text-white">Kontribusi</h3>
-              <p className="text-paper-400 mb-8 font-serif">Dana kontribusi digunakan untuk menutupi biaya tempat, konsumsi, suvenir, dan donasi untuk sekolah/guru.</p>
+              <h3 className="text-3xl font-serif font-bold mb-4 text-white">Kontribusi</h3>
+              <p className="text-paper-400 mb-8 font-serif leading-relaxed text-sm">
+                Total anggaran adalah minimal <strong>Rp 100 Juta</strong> yang akan dibagi ke 8 kelas. 
+                Apabila terkumpul lebih banyak akan sangat membantu sebagai budget tambahan untuk cenderamata guru, serta sisa dana akan digunakan untuk membantu sekolah kita.
+              </p>
               
               <div className="mb-10 p-4 border-2 border-paper-400 border-dashed text-center bg-navy-900/50">
-                <span className="text-4xl font-marker text-paper-100">{data?.contributionAmount || 'Rp 500.000'}</span>
-                <span className="text-paper-400 font-serif italic"> / orang</span>
+                <span className="text-3xl md:text-4xl font-marker text-paper-100">{data?.contributionAmount || 'Rp 12.500.000'}</span>
+                <span className="text-paper-400 font-serif italic block mt-1"> / kelas (Estimasi minimal)</span>
               </div>
 
               <ul className="space-y-4 mb-10 text-paper-300 font-serif">
@@ -101,6 +104,52 @@ const EventDetails = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Progress Kontribusi Kelas */}
+        {data?.classFundingProgress && data.classFundingProgress.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 bg-white p-8 border-2 border-navy-900 shadow-[8px_8px_0px_#142030] relative"
+          >
+            <div className="tape -top-4 left-1/2 -translate-x-1/2 w-32"></div>
+            <h3 className="text-3xl font-marker text-navy-900 mb-8 text-center">Progress Kontribusi per Kelas</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {data.classFundingProgress.map((cls, idx) => {
+                const percentage = Math.min(100, Math.round((cls.collected / cls.target) * 100)) || 0;
+                
+                return (
+                  <div key={idx} className="bg-paper-100 p-4 border border-navy-900 relative group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-bold font-serif text-navy-900">{cls.className}</span>
+                      <span className="text-sm font-marker text-navy-600">{percentage}%</span>
+                    </div>
+                    
+                    {/* Progress Bar Container */}
+                    <div className="h-4 w-full bg-paper-300 border border-navy-900 overflow-hidden relative">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${percentage}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.1 * idx }}
+                        className={`h-full border-r border-navy-900 ${
+                          percentage >= 100 ? 'bg-green-500' : 'bg-navy-700'
+                        }`}
+                      />
+                    </div>
+                    
+                    <div className="mt-2 text-xs font-serif text-navy-600 text-right">
+                      Rp {(cls.collected || 0).toLocaleString('id-ID')} / Rp {(cls.target || 0).toLocaleString('id-ID')}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );

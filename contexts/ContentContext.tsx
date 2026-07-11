@@ -73,6 +73,7 @@ export interface LandingPageData {
     alumniHead: Foreword;
     committeeHead: Foreword;
   };
+  classFundingProgress?: { className: string; collected: number; target: number }[];
 }
 
 const defaultData: LandingPageData = {
@@ -83,7 +84,17 @@ const defaultData: LandingPageData = {
   eventLocation: "Padang, Sumbar",
   aboutText1: "Telah 25 tahun kita meninggalkan gerbang SMAN 1 Padang. Membawa mimpi masing-masing, menempuh jalan yang berbeda. Kini saatnya kita kembali sejenak, memutar waktu, dan mengenang kembali masa-masa putih abu-abu yang penuh cerita.",
   aboutText2: "Reuni Perak ini bukan sekadar ajang berkumpul, melainkan momen untuk merajut kembali tali persaudaraan, berbagi cerita perjalanan hidup, dan mensyukuri pencapaian kita bersama.",
-  contributionAmount: "Rp 500.000",
+  contributionAmount: "Rp 12.500.000",
+  classFundingProgress: [
+    { className: "Kelas 2.1", collected: 2500000, target: 12500000 },
+    { className: "Kelas 2.2", collected: 5000000, target: 12500000 },
+    { className: "Kelas 2.3", collected: 1500000, target: 12500000 },
+    { className: "Kelas 2.4", collected: 0, target: 12500000 },
+    { className: "Kelas 2.5", collected: 12500000, target: 12500000 },
+    { className: "Kelas 2.6", collected: 1000000, target: 12500000 },
+    { className: "Kelas 2.7", collected: 7500000, target: 12500000 },
+    { className: "Kelas 2.8", collected: 3000000, target: 12500000 },
+  ],
   contacts: [
     { name: "Budi Santoso", phone: "0812-3456-7890" },
     { name: "Siti Aminah", phone: "0811-9876-5432" }
@@ -234,7 +245,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     const unsub = onSnapshot(doc(db, 'settings', 'landingPage'), (docSnap) => {
       if (docSnap.exists()) {
-        setData({ ...defaultData, ...docSnap.data() } as LandingPageData);
+        const fetchedData = docSnap.data();
+        if (fetchedData.contributionAmount === 'Rp 500.000') {
+          fetchedData.contributionAmount = 'Rp 12.500.000';
+        }
+        setData({ ...defaultData, ...fetchedData } as LandingPageData);
       } else {
         // Just use default data in memory if not exists
         setData(defaultData);
