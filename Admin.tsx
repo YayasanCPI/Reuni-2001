@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from './contexts/AuthContext';
 import { useContent } from './contexts/ContentContext';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from './lib/firebase';
 import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { LogOut, Save, Plus, Trash2 } from 'lucide-react';
@@ -14,6 +14,7 @@ const Admin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   
   const [formData, setFormData] = useState<LandingPageData | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -42,7 +43,11 @@ const Admin = () => {
     e.preventDefault();
     setLoginError('');
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      if (isRegistering) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
     } catch (err: any) {
       setLoginError(err.message || 'Gagal login.');
     }
@@ -70,7 +75,9 @@ const Admin = () => {
       <div className="min-h-screen flex flex-col items-center justify-center bg-paper-500 font-sans text-navy-900 px-4">
         <div className="bg-paper-200 p-8 rounded shadow-md border-2 border-navy-900 w-full max-w-md relative transform rotate-1">
           <div className="tape -top-4 left-1/2 -translate-x-1/2 w-24"></div>
-          <h2 className="text-3xl font-marker text-navy-900 mb-6 text-center transform -rotate-2">Admin Login</h2>
+          <h2 className="text-3xl font-marker text-navy-900 mb-6 text-center transform -rotate-2">
+            {isRegistering ? 'Daftar Admin Baru' : 'Admin Login'}
+          </h2>
           {loginError && <div className="bg-red-100 text-red-600 p-3 mb-4 rounded text-sm font-bold border border-red-300">{loginError}</div>}
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
@@ -94,8 +101,17 @@ const Admin = () => {
               />
             </div>
             <button type="submit" className="w-full bg-navy-900 text-paper-200 py-3 font-serif font-bold shadow-[2px_2px_0px_#8c7d66] hover:bg-navy-800 mt-4">
-              Masuk
+              {isRegistering ? 'Daftar' : 'Masuk'}
             </button>
+            <div className="text-center mt-4">
+              <button 
+                type="button" 
+                onClick={() => setIsRegistering(!isRegistering)}
+                className="text-sm font-serif text-navy-600 hover:text-navy-900 underline"
+              >
+                {isRegistering ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar Admin Baru'}
+              </button>
+            </div>
           </form>
         </div>
       </div>
