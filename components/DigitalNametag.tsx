@@ -71,7 +71,7 @@ const DigitalNametag: React.FC<Props> = ({ name, className, photo }) => {
             <div className="absolute inset-0 flex flex-col items-center">
               
               {/* Photo Area - Positioned to match the circle in the image */}
-              <div className="absolute top-[34%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[42%] aspect-square rounded-full flex items-center justify-center overflow-hidden z-20">
+              <div className="absolute top-[43%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[52%] aspect-square rounded-full flex items-center justify-center overflow-hidden z-20">
                 {photo ? (
                   <img src={photo} alt={name} className="w-full h-full object-cover" crossOrigin="anonymous" />
                 ) : (
@@ -83,11 +83,11 @@ const DigitalNametag: React.FC<Props> = ({ name, className, photo }) => {
               </div>
 
               {/* Name Area */}
-              <div className="absolute top-[59%] w-full px-8 text-center z-20 flex flex-col gap-1">
-                <h2 className="text-white font-bold uppercase tracking-wide leading-tight text-lg sm:text-xl drop-shadow-md" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+              <div className="absolute top-[68%] w-full px-8 text-center z-20 flex flex-col gap-1">
+                <h2 className="text-white font-black uppercase tracking-widest leading-tight text-2xl sm:text-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                   {name || 'NAMA LENGKAP ALUMNI'}
                 </h2>
-                <h3 className="text-white font-bold uppercase tracking-wider text-sm sm:text-base drop-shadow-md" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+                <h3 className="text-white font-bold uppercase tracking-widest text-lg sm:text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-1" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
                   {className || 'JURUSAN/KELAS'}
                 </h3>
               </div>
