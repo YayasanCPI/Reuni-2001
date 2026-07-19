@@ -5,6 +5,7 @@ import { useContent } from '../contexts/ContentContext';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import PaymentCard from './PaymentCard';
+import DigitalNametag from './DigitalNametag';
 
 const RSVP = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -136,63 +137,12 @@ const RSVP = () => {
                   Simpan (Screenshot) Nametag Digital Anda di bawah ini sebagai kenang-kenangan dan bukti kehadiran.
                 </p>
 
-                {/* Nametag Dummy */}
-                <div className="flex flex-col md:flex-row gap-6 mb-8 w-full justify-center perspective-1000">
-                  {/* Depan */}
-                  <div className="w-full max-w-[240px] bg-gradient-to-b from-blue-700 to-blue-900 rounded-xl overflow-hidden shadow-xl border border-gray-300 relative mx-auto transform transition-transform hover:scale-105 hover:-rotate-2 cursor-pointer">
-                    <div className="h-8 bg-gray-200 w-full flex justify-center items-center rounded-t-xl border-b border-gray-400">
-                       <div className="w-16 h-2 bg-gray-400 rounded-full"></div>
-                    </div>
-                    <div className="p-4 flex flex-col items-center">
-                      <img src="https://i.ibb.co.com/wZrZzHDN/Logosmansa-1-removebg-preview.png" alt="Logo" className="w-12 h-12 mb-2 bg-white rounded-full p-1" />
-                      <h4 className="text-white font-bold text-center leading-tight mb-4 text-sm font-serif">REUNI PERAK<br/>SMANSA 2001</h4>
-                      
-                      <div className="w-24 h-32 bg-gray-200 border-2 border-white rounded mb-2 overflow-hidden">
-                        {formData.photo ? (
-                          <img src={formData.photo} alt="Foto Profil" className="w-full h-full object-cover grayscale-[20%]" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">Poto Jadul</div>
-                        )}
-                      </div>
-                      
-                      <h2 className="text-3xl font-marker text-white uppercase tracking-wider mt-2 mb-1">{formData.nickname || formData.name.split(' ')[0] || 'NAMA'}</h2>
-                      <div className="bg-white text-blue-900 px-4 py-1 rounded-full font-bold text-sm mb-4">
-                        {formData.class || 'KELAS'}
-                      </div>
-
-                      <div className="w-full flex justify-between items-end mt-2 border-t border-blue-800 pt-2">
-                         <div className="text-[8px] text-left text-blue-200 leading-tight">
-                           Panitia<br/>Reuni Perak<br/>SMANSA 2001
-                         </div>
-                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=SMANSA2001" alt="QR" className="w-10 h-10 bg-white p-0.5 rounded" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Belakang */}
-                  <div className="w-full max-w-[240px] bg-gradient-to-b from-gray-200 to-gray-300 rounded-xl overflow-hidden shadow-xl border border-gray-400 relative mx-auto transform transition-transform hover:scale-105 hover:rotate-2 cursor-pointer hidden md:block">
-                     <div className="h-8 bg-blue-800 w-full flex justify-center items-center rounded-t-xl border-b border-blue-900">
-                       <div className="w-16 h-2 bg-blue-900 rounded-full"></div>
-                    </div>
-                    <div className="p-4">
-                      <h4 className="font-bold text-center text-navy-900 mb-4 text-sm border-b-2 border-navy-900 pb-2">RUNDOWN<br/>ACARA SINGKAT</h4>
-                      
-                      <div className="space-y-3 text-xs text-navy-800 font-serif">
-                        <div>
-                          <strong className="block text-navy-900">HARI SABTU (Di SMANSA)</strong>
-                          <span className="font-bold">08.00 - 11.30:</span><br/>
-                          Sharing Session & Apresiasi Guru<br/>
-                          <span className="font-bold">18.00 - 22.00:</span><br/>
-                          Gala Dinner & Sesi Nostalgia
-                        </div>
-                        <div>
-                          <strong className="block text-navy-900 mt-2">HARI MINGGU (Di SMANSA Lama)</strong>
-                          <span className="font-bold">06.30 - Selesai:</span><br/>
-                          Olahraga, Napak Tilas, & Katupek Gulai Cubadak.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="w-full max-w-sm mx-auto mb-8">
+                  <DigitalNametag 
+                    name={formData.nickname || formData.name} 
+                    className={formData.class} 
+                    photo={formData.photo} 
+                  />
                 </div>
 
                 <button 
@@ -426,6 +376,22 @@ const RSVP = () => {
                       onChange={handlePhotoUpload}
                       className="w-full px-3 py-1.5 bg-paper-100 border border-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-500 transition-all font-marker text-navy-900 text-sm file:mr-4 file:py-1 file:px-3 file:border-0 file:text-sm file:font-semibold file:bg-navy-900 file:text-paper-100 hover:file:bg-navy-800 cursor-pointer"
                     />
+                    {formData.photo && (
+                      <div className="mt-2 relative inline-block">
+                        <img src={formData.photo} alt="Preview" className="w-24 h-24 object-cover border-2 border-navy-900 shadow-[4px_4px_0px_#142030]" />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData(prev => ({ ...prev, photo: '' }));
+                            const fileInput = document.getElementById('photo') as HTMLInputElement;
+                            if (fileInput) fileInput.value = '';
+                          }}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold border border-navy-900 shadow-sm hover:bg-red-600 focus:outline-none"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
 
