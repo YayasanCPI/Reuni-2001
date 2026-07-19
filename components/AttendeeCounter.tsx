@@ -16,8 +16,11 @@ const AttendeeCounter = () => {
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
-    // Listen to Firebase 'attendees' collection
-    const q = query(collection(db, 'attendees'));
+    // Listen to Firebase 'attendees' collection for confirmed attendees
+    const q = query(
+      collection(db, 'attendees'),
+      where('attendance', '==', 'yes')
+    );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setCount(snapshot.size);
     }, (error) => {

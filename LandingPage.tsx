@@ -11,6 +11,7 @@ import Sponsorship from './components/Sponsorship';
 import Gallery from './components/Gallery';
 import RSVP from './components/RSVP';
 import AttendeeCounter from './components/AttendeeCounter';
+import AttendeeList from './components/AttendeeList';
 import NostalgiaMessages from './components/NostalgiaMessages';
 import Footer from './components/Footer';
 import AudioPlayer from './components/AudioPlayer';
@@ -37,6 +38,7 @@ const LandingPage = () => {
         <NostalgiaMessages />
         <Gallery />
         <AttendeeCounter />
+        <AttendeeList />
         <RSVP />
       </main>
       <Footer />
