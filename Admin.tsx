@@ -180,6 +180,13 @@ const Admin = () => {
                       }`}>
                         {a.attendance === 'yes' ? 'Hadir' : a.attendance === 'maybe' ? 'Mungkin' : 'Skip'}
                       </span>
+                      {a.attendance === 'yes' && a.attendedEvents && (
+                        <div className="mt-2 text-xs flex flex-col gap-1">
+                          {a.attendedEvents.pagi && <span className="bg-paper-200 px-1 border border-navy-300">Pagi</span>}
+                          {a.attendedEvents.sore && <span className="bg-paper-200 px-1 border border-navy-300">Sore</span>}
+                          {a.attendedEvents.minggu && <span className="bg-paper-200 px-1 border border-navy-300">Minggu</span>}
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -18,6 +18,11 @@ const RSVP = () => {
     companyName: '',
     class: '',
     attendance: '',
+    attendedEvents: {
+      pagi: false,
+      sore: false,
+      minggu: false
+    },
     photo: ''
   });
 
@@ -438,7 +443,7 @@ const RSVP = () => {
 
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-navy-800 font-serif block mb-2">Status Kehadiran</label>
-                  <div className="flex flex-wrap gap-3 font-marker text-sm">
+                  <div className="flex flex-wrap gap-3 font-marker text-sm mb-4">
                     <label className={`flex items-center gap-2 cursor-pointer p-2 border border-navy-900 transition-colors ${formData.attendance === 'yes' ? 'bg-navy-900 text-white' : 'bg-paper-100 hover:bg-paper-300 text-navy-900'}`}>
                       <input type="radio" name="attendance" value="yes" checked={formData.attendance === 'yes'} onChange={e => setFormData({...formData, attendance: e.target.value})} required className="sr-only" />
                       <span>Hadir</span>
@@ -452,6 +457,24 @@ const RSVP = () => {
                       <span>Maaf, skip</span>
                     </label>
                   </div>
+                  
+                  {formData.attendance === 'yes' && (
+                    <div className="bg-paper-200 border border-navy-900 p-4 space-y-3">
+                      <label className="text-xs font-bold text-navy-800 font-serif block mb-2">Acara yang Dihadiri:</label>
+                      <label className="flex items-center gap-2 text-sm font-sans text-navy-900 cursor-pointer">
+                        <input type="checkbox" checked={formData.attendedEvents.pagi} onChange={e => setFormData({...formData, attendedEvents: {...formData.attendedEvents, pagi: e.target.checked}})} className="w-4 h-4 text-navy-900" />
+                        <span>Pagi (Napak Tilas)</span>
+                      </label>
+                      <label className="flex items-center gap-2 text-sm font-sans text-navy-900 cursor-pointer">
+                        <input type="checkbox" checked={formData.attendedEvents.sore} onChange={e => setFormData({...formData, attendedEvents: {...formData.attendedEvents, sore: e.target.checked}})} className="w-4 h-4 text-navy-900" />
+                        <span>Sore / Malam (Gala Dinner)</span>
+                      </label>
+                      <label className="flex items-center gap-2 text-sm font-sans text-navy-900 cursor-pointer">
+                        <input type="checkbox" checked={formData.attendedEvents.minggu} onChange={e => setFormData({...formData, attendedEvents: {...formData.attendedEvents, minggu: e.target.checked}})} className="w-4 h-4 text-navy-900" />
+                        <span>Minggu (Olahraga / Kuliner)</span>
+                      </label>
+                    </div>
+                  )}
                 </div>
 
                 <button 

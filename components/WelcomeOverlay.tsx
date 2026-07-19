@@ -123,10 +123,10 @@ export const WelcomeOverlay = () => {
       <AnimatePresence>
         {showBanner && visitorInfo && (
           <motion.div 
-            initial={{ y: 100, opacity: 0, x: '-50%' }}
+            initial={{ y: -100, opacity: 0, x: '-50%' }}
             animate={{ y: 0, opacity: 1, x: '-50%' }}
-            exit={{ y: 100, opacity: 0, x: '-50%' }}
-            className="fixed bottom-6 left-1/2 z-[60] bg-navy-900 text-paper-200 py-3 px-6 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.3)] border-2 border-paper-500 flex justify-center items-center max-w-[90vw] md:max-w-max"
+            exit={{ y: -100, opacity: 0, x: '-50%' }}
+            className="fixed top-24 left-1/2 z-[60] bg-navy-900/70 backdrop-blur-md text-paper-200 py-3 px-6 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.3)] border border-paper-500/50 flex justify-center items-center max-w-[90vw] md:max-w-max"
           >
             <div className="flex items-center gap-3 text-sm md:text-base font-serif">
               <span className="font-bold whitespace-nowrap">
