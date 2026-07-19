@@ -4,6 +4,7 @@ import { Send, CheckCircle2, Download } from 'lucide-react';
 import { useContent } from '../contexts/ContentContext';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import PaymentCard from './PaymentCard';
 
 const RSVP = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -110,19 +111,6 @@ const RSVP = () => {
                   <>
                     <p className="text-navy-800">Budi Santoso (0812-3456-7890)</p>
                     <p className="text-navy-800">Siti Aminah (0811-9876-5432)</p>
-                  </>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-2 border-l-2 border-dashed border-navy-700 pl-6 bg-paper-400 p-4 transform -rotate-1">
-                <div className="tape -top-2 -left-4 w-12 rotate-90"></div>
-                <h4 className="font-bold text-navy-900 font-marker text-lg">Rekening Panitia:</h4>
-                {data?.bankAccounts?.map((bank, idx) => (
-                  <p key={idx} className="text-navy-800">{bank.bank}: {bank.number} a.n. {bank.name}</p>
-                )) || (
-                  <>
-                    <p className="text-navy-800">BCA: 1234567890 a.n. Reuni SMANSA</p>
-                    <p className="text-navy-800">Mandiri: 0987654321 a.n. Reuni SMANSA</p>
                   </>
                 )}
               </div>
@@ -488,6 +476,11 @@ const RSVP = () => {
               </form>
             )}
           </motion.div>
+        </div>
+        
+        {/* Payment Card Section */}
+        <div className="mt-16 w-full">
+          <PaymentCard />
         </div>
       </div>
     </section>
