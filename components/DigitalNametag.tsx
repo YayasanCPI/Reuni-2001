@@ -26,6 +26,8 @@ const DigitalNametag: React.FC<Props> = ({ name, className, photo }) => {
         quality: 1.0,
         pixelRatio: 3, // High quality
         cacheBust: true,
+        skipFonts: true,
+        fontEmbedCSS: '',
       });
 
       nametagRef.current.style.transform = originalTransform;

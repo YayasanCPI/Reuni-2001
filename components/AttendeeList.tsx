@@ -58,11 +58,7 @@ const AttendeeList = () => {
             {attendees.map((attendee) => (
               <div key={attendee.id} className="bg-paper-100 border border-navy-900 p-4 shadow-[2px_2px_0px_#142030] flex gap-4 items-start hover:translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_#142030] transition-all">
                 <div className="w-12 h-12 bg-navy-100 border border-navy-900 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  {attendee.photo ? (
-                    <img src={attendee.photo} alt={attendee.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <User className="w-6 h-6 text-navy-700" />
-                  )}
+                  <User className="w-6 h-6 text-navy-700" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-navy-900 truncate" title={attendee.name}>

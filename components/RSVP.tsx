@@ -33,7 +33,35 @@ const RSVP = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, photo: reader.result as string }));
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 500;
+          const MAX_HEIGHT = 500;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+          
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          setFormData(prev => ({ ...prev, photo: dataUrl }));
+        };
+        img.src = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
@@ -55,26 +83,36 @@ const RSVP = () => {
 
     setIsSubmitting(true);
     try {
-      // Save to Firebase first
+      // Save to Firebase first (excluding photo to avoid size limits)
       try {
+        const { photo, ...dataToSave } = formData;
         await addDoc(collection(db, 'attendees'), {
-          ...formData,
+          ...dataToSave,
           createdAt: serverTimestamp(),
           status: 'confirmed'
         });
       } catch (fbErr) {
         console.error("Firebase save error", fbErr);
+        // Continue to Google Sheets even if Firebase fails, to avoid data loss
       }
 
       // We use no-cors because Apps Script might not return proper CORS headers for JSON
-      await fetch(data.googleSheetWebAppUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      if (data.googleSheetWebAppUrl) {
+        try {
+          const { photo, ...dataToSave } = formData;
+          await fetch(data.googleSheetWebAppUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSave),
+          });
+        } catch (fetchErr) {
+          console.error("Google Sheets save error", fetchErr);
+        }
+      }
+      
       // no-cors means we can't read the response, but if it didn't throw it's likely fine.
       setIsSubmitted(true);
     } catch (err) {

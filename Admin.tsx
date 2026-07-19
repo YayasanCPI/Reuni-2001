@@ -22,9 +22,13 @@ const Admin = () => {
 
   React.useEffect(() => {
     if (!user) return;
-    const q = query(collection(db, 'attendees'), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, 'attendees'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const attendeesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const attendeesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).sort((a: any, b: any) => {
+        const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+        const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+        return timeB - timeA;
+      });
       setAttendees(attendeesData);
     }, (error) => {
       console.error("Admin onSnapshot error:", error.code, error.message);
