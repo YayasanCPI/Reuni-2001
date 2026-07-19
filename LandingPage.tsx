@@ -16,10 +16,12 @@ import Footer from './components/Footer';
 import AudioPlayer from './components/AudioPlayer';
 import BackgroundDecorations from './components/BackgroundDecorations';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import WelcomeOverlay from './components/WelcomeOverlay';
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-paper-500 font-sans text-navy-900 selection:bg-paper-300">
+      <WelcomeOverlay />
       <Navbar />
       <AudioPlayer />
       <BackgroundDecorations />
