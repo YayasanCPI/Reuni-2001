@@ -61,7 +61,7 @@ const DigitalNametag: React.FC<Props> = ({ name, className, photo }) => {
           {/* Actual Paper Card */}
           <div className="w-full relative overflow-hidden rounded-lg border border-gray-100 z-10 bg-white shadow-inner aspect-[638/1008]">
             <img 
-              src="https://i.ibb.co.com/6723bwcK/Nama-Lengkap-Alumni.png" 
+              src="https://i.ibb.co.com/pjV6R85T/Nama-Lengkap-Alumni-3.png" 
               alt="Background" 
               className="absolute inset-0 w-full h-full object-cover"
               crossOrigin="anonymous"
